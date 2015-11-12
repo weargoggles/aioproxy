@@ -1,7 +1,7 @@
 # example __main__
 
 ```
-sk_exit(loop_instance, signal_name):
+def ask_exit(loop_instance, signal_name):
     print("got signal %s, stopping" % signal_name)
     loop_instance.stop()
 

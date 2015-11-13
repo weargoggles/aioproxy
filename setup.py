@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from distutils.core import setup
+from setuptools import setup
 
 setup(
     name='aioproxy',
@@ -11,4 +11,6 @@ setup(
     url='https://github.com/weargoggles/aioproxy',
     py_modules=['aioproxy'],
     requires=['aiohttp'],
+    test_suite='nose.collector',
+    tests_require=['nose'],
 )

@@ -47,7 +47,7 @@ class ReverseProxyResponse(aiohttp.client.ClientResponse):
         self._should_close = message.should_close
 
         # headers
-        self.headers = CIMultiDictProxy(message.get_headers)
+        self.headers = CIMultiDictProxy(message.headers)
 
         # payload
         response_with_body = self._need_parse_response_body()
@@ -100,15 +100,15 @@ class ReverseProxyMatch(aiohttp.abc.AbstractMatchInfo):
 
             async with aiohttp.client.request(
                 request.method, 'http://' + host_and_port + request.path,
-                headers=request.get_headers,
+                headers=request.headers,
                 chunked=32768,
                 response_class=ReverseProxyResponse,
             ) as r:
                 logger.info('opened backend request in %d ms' % ((time.time() - start) * 1000))
-                response = aiohttp.web.StreamResponse(status=r.get_status,
-                                                      headers=r.get_headers)
+                response = aiohttp.web.StreamResponse(status=r.status,
+                                                      headers=r.headers)
                 await response.prepare(request)
-                content = r.get_body
+                content = r.content
                 while True:
                     chunk = await content.read(32768)
                     if not chunk:

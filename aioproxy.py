@@ -1,8 +1,5 @@
-import asyncio
-import functools
 import http.cookies
 import logging
-import signal
 import time
 from abc import ABCMeta, abstractmethod
 
@@ -29,6 +26,7 @@ class ReverseProxyResponse(aiohttp.client.ClientResponse):
     async def start(self, connection, read_until_eof=False):
         """Start response processing."""
         self._setup_connection(connection)
+        message = None
 
         while True:
             httpstream = self._reader.set_parser(self._response_parser)
@@ -82,8 +80,8 @@ class ReverseProxyMatch(aiohttp.abc.AbstractMatchInfo):
     looker-upper, which provides it with the destination of the outgoing
     request.
     """
-    def __init__(self, looker_upper):
-        self.looker_upper = looker_upper
+    def __init__(self, resolver):
+        self.resolver = resolver
 
     async def get_destination_details(self, request):
         """
@@ -91,8 +89,7 @@ class ReverseProxyMatch(aiohttp.abc.AbstractMatchInfo):
         :param request:
         :return:
         """
-        a = await self.looker_upper.find_destination(request)
-        return await self.looker_upper.find_destination(request)
+        return await self.resolver.find_destination(request)
 
     # noinspection PyMethodOverriding
     async def handler(self, request):

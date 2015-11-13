@@ -10,5 +10,5 @@ setup(
     author_email='pete@weargoggles.co.uk',
     url='https://github.com/weargoggles/aioproxy',
     py_modules=['aioproxy'],
-    requires=['aiohttp', 'aioredis'],
+    requires=['aiohttp'],
 )

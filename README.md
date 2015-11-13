@@ -1,3 +1,6 @@
+![travis build status](https://travis-ci.org/weargoggles/aioproxy.svg)
+![pypi version](https://img.shields.io/pypi/v/aioproxy.svg)
+
 # example __main__
 
 ```

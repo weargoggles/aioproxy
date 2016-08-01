@@ -9,7 +9,7 @@ import aiohttp.client
 import aiohttp.log
 import aiohttp.server
 import aiohttp.web
-from aiohttp.multidict import CIMultiDictProxy
+from aiohttp import CIMultiDictProxy
 
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger(__name__)
@@ -124,6 +124,9 @@ class ReverseProxyMatch(aiohttp.abc.AbstractMatchInfo):
 
     def route(self):
         pass
+
+    expect_handler = None
+    http_exception = get_info = lambda self: None
 
 
 class HttpStatus(Exception):

@@ -10,7 +10,7 @@ setup(
     author_email='pete@weargoggles.co.uk',
     url='https://github.com/weargoggles/aioproxy',
     py_modules=['aioproxy'],
-    install_requires=['aiohttp'],
+    install_requires=['aiohttp<0.23'],
     test_suite='nose.collector',
     tests_require=['nose'],
 )

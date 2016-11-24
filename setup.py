@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='aioproxy',
-    version='0.0.2',
+    version='0.0.4',
     description='reverse proxy with aiohttp',
     author='Pete Wildsmith',
     author_email='pete@weargoggles.co.uk',
